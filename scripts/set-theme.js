@@ -1,45 +1,52 @@
-/* Этот скрипт использует имена классов theme-menu__button, theme-dark, theme-light и theme-auto;
-еще атрибуты disabled и data-theme. Поэтому их нельзя менять в HTML. */
+const changeTheme = (theme) => {
+	document.documentElement.className = '';
+	if (theme === 'auto') {
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		document.documentElement.classList.add(prefersDark ? 'theme-dark' : 'theme-light');
+	} else {
+		document.documentElement.classList.add(`theme-${theme}`);
+	}
+	localStorage.setItem('theme', theme);
+};
 
-function changeTheme(theme) {
-  document.documentElement.className = '';
-  document.documentElement.classList.add(`theme-${theme}`);
-  localStorage.setItem('theme', theme);
-}
+const applyAutoTheme = () => {
+	const theme = localStorage.getItem('theme');
+	if (theme === 'auto') {
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		document.documentElement.className = '';
+		document.documentElement.classList.add(prefersDark ? 'theme-dark' : 'theme-light');
+	}
+};
 
 (function initTheme() {
-  const theme = localStorage.getItem('theme');
-  if (theme) {
-    changeTheme(theme);
-  }
+	const theme = localStorage.getItem('theme') || 'auto';
+	changeTheme(theme);
+
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyAutoTheme);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  const root = document.documentElement;
-  const themeButtons = document.querySelectorAll('.theme-menu__button');
+	const themeButtons = document.querySelectorAll('.theme-switcher__button');
 
-  function setDisabled(theme) {
-    themeButtons.forEach((item) => {
-      if (item.getAttribute('data-theme') === theme) {
-        item.setAttribute('disabled', true);
-      } else {
-        item.removeAttribute('disabled');
-      }
-    });
-  }
 
-  if ([...root.classList].includes('theme-light')) {
-    setDisabled('light');
-  } else if ([...root.classList].includes('theme-dark')) {
-    setDisabled('dark');
-  } else {
-    setDisabled('auto');
-  }
+	const setDisabled = (theme) => {
+		themeButtons.forEach((item) => {
+			item.disabled = item.getAttribute('data-theme') === theme;
+		});
+	};
 
-  themeButtons.forEach((button) => {
-    button.onclick = () => {
-      changeTheme(button.getAttribute('data-theme'));
-      setDisabled(button.getAttribute('data-theme'));
-    };
-  });
+	const initialTheme = localStorage.getItem('theme') || 'auto';
+	setDisabled(initialTheme);
+
+
+	themeButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const selectedTheme = button.getAttribute('data-theme');
+			changeTheme(selectedTheme);
+			setDisabled(selectedTheme);
+			if (selectedTheme === 'auto') {
+				applyAutoTheme();
+			}
+		});
+	});
 });

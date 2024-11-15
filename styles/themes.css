@@ -1,6 +1,34 @@
-/* В этом файле вы опишете значения переменных в разных цветовых схемах.
-Придерживайтесь такого именования классов:
-✦ theme-dark — класс тёмной темы
-✦ theme-light — класс светлой темы
-✦ не забудьте описать стили для изменения темы через медизапрос пользовательских предпочтений
-*/
+:root.theme-light {
+	--theme-bs-color: #000;
+	--theme-bg-color: #fff;
+	--theme-btn-text-color: #fff;
+	--themes-font-weight-title: 700;
+	--theme-content-fw: 400;
+	--background: repeating-linear-gradient(90deg, #d3d3d3 0px 2px, rgba(0, 0, 0, 0) 2px 4px),
+		repeating-linear-gradient(180deg, #d3d3d3 0px 2px, rgba(0, 0, 0, 0) 2px 4px),
+		linear-gradient(180deg, #e7e7e7 0%, #1a1a1a 100%);
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--theme-bs-color: #000;
+		--theme-bg-color: #fff;
+		--theme-btn-text-color: #fff;
+		--themes-font-weight-title: 700;
+		--theme-content-fw: 400;
+		--background: repeating-linear-gradient(90deg, #d3d3d3 0px 2px, rgba(0, 0, 0, 0) 2px 4px),
+			repeating-linear-gradient(180deg, #d3d3d3 0px 2px, rgba(0, 0, 0, 0) 2px 4px),
+			linear-gradient(180deg, #e7e7e7 0%, #1a1a1a 100%);
+	}
+}
+
+:root.theme-dark {
+	--theme-bs-color: #00cc14;
+	--theme-bg-color: #000;
+	--theme-btn-text-color: #00cc14;
+	--themes-font-weight-title: 785;
+	--theme-content-fw: 465;
+	--background: repeating-linear-gradient(90deg, black 0px 2px, rgba(0, 0, 0, 0) 2px 4px),
+		repeating-linear-gradient(180deg, black 0px 2px, rgba(0, 0, 0, 0) 2px 4px),
+		linear-gradient(180deg, #007f0c 0%, #004306 100%);
+}

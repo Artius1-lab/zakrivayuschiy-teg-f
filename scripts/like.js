@@ -1,41 +1,27 @@
-/* этот скрипт использует такие имена классов:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
-Если эти классы поменять в HTML, скрипт перестанет работать. Будьте аккуратны.
-*/
+const iconButtons = document.querySelectorAll('.card__icon-btn');
+const likeButtons = document.querySelectorAll('.card__like-btn');
+const hearts = document.querySelectorAll('.like-icon');
 
-const likeHeartArray = document.querySelectorAll('.like-icon');
-const likeButtonArray = document.querySelectorAll('.card__like-button');
-const iconButtonArray = document.querySelectorAll('.card__icon-button');
+const toggleLike = (button, heart) => {
+	heart.classList.toggle('is-liked');
+	updateButtonText(heart, button);
+};
 
-iconButtonArray.forEach((iconButton, index) => {
-  iconButton.onclick = () =>
-    toggleIsLiked(likeHeartArray[index], likeButtonArray[index]);
+const updateButtonText = (heart, button) => {
+	const textElement = button.querySelector('.btn__txt');
+	const newText = heart.classList.contains('is-liked') ? 'Unlike' : 'Like';
+	setTimeout(() => { textElement.textContent = newText; }, 500);
+};
+
+iconButtons.forEach((iconButton, idx) => {
+	iconButton.addEventListener('click', () => toggleLike(likeButtons[idx], hearts[idx]));
+	iconButton.addEventListener('mouseleave', () => {
+		if (!iconButton.matches(':hover')) {
+			iconButton.blur();
+		}
+	});
 });
 
-likeButtonArray.forEach((button, index) => {
-  button.onclick = () => toggleIsLiked(likeHeartArray[index], button);
+likeButtons.forEach((button, idx) => {
+	button.addEventListener('click', () => toggleLike(button, hearts[idx]));
 });
-
-function toggleIsLiked(heart, button) {
-  heart.classList.toggle('is-liked');
-  setButtonText(heart, button);
-}
-
-function setButtonText(heart, button) {
-  if ([...heart.classList].includes('is-liked')) {
-    setTimeout(
-      () => (button.querySelector('.button__text').textContent = 'Unlike'),
-      500
-    );
-  } else {
-    setTimeout(
-      () => (button.querySelector('.button__text').textContent = 'Like'),
-      500
-    );
-  }
-}
