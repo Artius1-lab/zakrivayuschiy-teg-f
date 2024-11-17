@@ -1,6 +1,6 @@
 :root {
-	--font-default: "Inter-Variable", serif;
-	--font-accent: "PressStart2P", fantasy;
+	--font-default: "Inter-Variable";
+	--font-accent: "PressStart2P";
 	--theme-bs-color: #00cc14;
 	--theme-bg-color: #000;
 	--theme-btn-text-color: #00cc14;
