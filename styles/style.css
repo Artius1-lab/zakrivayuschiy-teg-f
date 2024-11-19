@@ -12,7 +12,6 @@
 
 	color: var(--theme-bs-color);
 	font-family: var(--font-default), sans-serif;
-
 	font-variation-settings: "wght" var(--theme-content-fw);
 }
 
@@ -140,6 +139,7 @@ header {
 	aspect-ratio: 1 / 1;
 }
 
+
 .cover__watermark {
 	position: absolute;
 	top: 25px;
@@ -152,10 +152,7 @@ header {
 	text-shadow: 0 0 1px var(--theme-bg-color);
 }
 
-@supports (
-	((text-stroke: 1px var(--theme-bg-color)) or (-webkit-text-stroke: 1px var(--theme-bg-color))) and
-		(mix-blend-mode: hard-light)
-) {
+@supports (((text-stroke: 1px var(--theme-bg-color)) or (-webkit-text-stroke: 1px var(--theme-bg-color))) and (mix-blend-mode: hard-light)) {
 	.cover__watermark {
 		text-shadow: none;
 		-webkit-text-stroke: 1px var(--theme-bg-color);
@@ -172,7 +169,6 @@ header {
 	padding-bottom: 22px;
 	font-size: 18px;
 	line-height: 21px;
-	font-variation-settings: "wght" var(--theme-content-fw);
 }
 
 .blog-post__btns {
@@ -311,9 +307,11 @@ header {
 	.btn:hover .btn__txt {
 		color: var(--theme-btn-text-color);
 	}
+
 	.btn svg {
 		color: var(--theme-btn-text-color);
 	}
+
 	.btn:hover svg {
 		color: var(--theme-btn-text-color);
 	}
@@ -354,6 +352,7 @@ dialog::backdrop {
 	line-height: 150%;
 	text-transform: uppercase;
 }
+
 .dialog__warning svg {
 	width: 39px;
 	flex-shrink: 0;
@@ -369,39 +368,39 @@ dialog::backdrop {
 }
 
 /* filters */
-.image_brightness {
+.image_filter1 {
 	filter: brightness(130%);
 }
 
-.image_contrast {
-	filter: contrast(150%);
+.image_filter2 {
+	filter: saturate(0.2);
 }
 
-.image_blur {
-	filter: blur(0.3rem);
+.image_filter3 {
+	filter: hue-rotate(-2deg) saturate(4) brightness(1) contrast(1.2);
 }
 
-.image_opacity {
-	filter: opacity(0.8);
+.image_filter4 {
+	filter: hue-rotate(20deg) brightness(1.2) saturate(1);
 }
 
-.image_grayscale {
-	filter: grayscale(0.8);
+.image_filter5 {
+	filter: invert(1) brightness(0.8);
 }
 
-.image_saturate {
-	filter: saturate(158%);
+.image_filter6 {
+	filter: sepia(0.8) saturate(.5);
 }
 
-.image_sepia {
-	filter: sepia(80%);
+.image_filter7 {
+	filter: blur(15px);
 }
 
-.image_combinate {
-	filter: contrast(200%) blur(0.15rem);
+.image_filter8 {
+	filter: hue-rotate(95deg) contrast(0.4) saturate(2) blur(1.5px);
 }
 
-@media (width <= 450px) {
+@media (width <=450px) {
 	.page {
 		width: 100%;
 		min-width: 320px;
@@ -419,6 +418,7 @@ dialog::backdrop {
 	.dialog {
 		padding: 30px 40px;
 	}
+
 	.cover__watermark {
 		top: 23px;
 		right: 11px;
